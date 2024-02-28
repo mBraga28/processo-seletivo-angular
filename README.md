@@ -31,10 +31,10 @@ Utilizando o sistema, é possível facilmente adicionar novas clínicas, visuali
 
 ## O que esperamos
 
-- [ ] Integração do projeto com Backend (efetuar processamentos que reflitam em um banco de dados a sua escolha);
+- [x] Integração do projeto com Backend (efetuar processamentos que reflitam em um banco de dados a sua escolha);
 - [ ] Efetuar sistema de Auth Guard, permitindo que apenas usuários logados possam acessar páginas restritas;
-- [ ] Possibilidade de editar / excluir / criar e listar clínicas;
-- [ ] Criação e login de usuários;
+- [x] Possibilidade de editar / excluir / criar e listar clínicas;
+- [x] Criação e login de usuários;
 
 ## Diferenciais
 

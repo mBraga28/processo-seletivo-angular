@@ -14,6 +14,7 @@ import { LayoutModule } from './components/layout/layout.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { HttpClientModule } from '@angular/common/http';
 import { InfoClincPipe } from './pipes/info-clinc.pipe';
+import { PageRegisterComponent } from './pages/page-register/page-register.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { InfoClincPipe } from './pipes/info-clinc.pipe';
     DefaultToastComponent,
     PageListComponent,
     PageInfoComponent,
+    PageRegisterComponent,
   ],
   imports: [
     BrowserModule,

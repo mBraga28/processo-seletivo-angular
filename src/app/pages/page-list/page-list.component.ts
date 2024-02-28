@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClincDTO } from 'src/app/dtos/clinc.dto';
@@ -17,6 +18,7 @@ export class PageListComponent implements OnInit {
       id: 2,
       name: 'Clinca exemplo A',
       phone: '81994381298',
+      email: 'clinicaa@gmail.com',
       ownerName: 'Avelino Alonso',
       cep: '52020213',
       uf: 'PE',
@@ -31,6 +33,7 @@ export class PageListComponent implements OnInit {
       id: 3,
       name: 'Clinca exemplo B',
       phone: '819948301',
+      email: 'clinicab@gmail.com',
       ownerName: 'Pedro Henrique',
       cep: '52020213',
       uf: 'PE',
@@ -45,6 +48,7 @@ export class PageListComponent implements OnInit {
       id: 4,
       name: 'Clinca exemplo C',
       phone: '819948301',
+      email: 'clinicac@gmail.com',
       ownerName: 'Antonio',
       cep: '52020200',
       uf: 'PE',
@@ -61,30 +65,35 @@ export class PageListComponent implements OnInit {
     private clincService: ClincService,
     private toastService: ToastService,
     private route: Router,
-  ){}
+    private http: HttpClient // Inject HttClient
+  ) { }
 
   ngOnInit(): void {
     this.clincService.getAllClincs().subscribe({
-      next: (value: any[]) => {
-        console.log(value);
-      },
-      error: (err: any) => {
-        this.toastService.showError(`Erro ao resgatar listagem de clínicas`);
-      }
+      next: (clinics) => this.clinics = clinics,
+      error: (err) => this.toastService.showError(`Erro ao carregar clínicas: ${err.message}`)
     });
   }
 
-  redirectNewClinc(){
+  redirectNewClinc() {
     this.route.navigate([RoutesEnum.SESSION_NEW_CLINC]);
   }
 
-  edit(clincId: any){
+  edit(clincId: any) {
     console.log(`Id da clínica: ${clincId}`);
     this.route.navigate([`${RoutesEnum.SESSION_CLINC_INFO}/${clincId}`])
   }
 
-  delete(clincId: any){
+  delete(clincId: any) {
     console.log(`Id da clínica: ${clincId} para deletar`);
+    this.clincService.deleteClinc(clincId)
+      .subscribe({
+        next: () => {
+          this.toastService.showSuccess('Clínica excluída com sucesso!');
+          this.clinics = this.clinics.filter(c => c.id !== clincId); // Atualizar a lista local
+        },
+        error: (err) => this.toastService.showError(`Erro ao excluir clínica: ${err.message}`)
+      });
   }
 
 }

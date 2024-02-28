@@ -28,16 +28,16 @@ export class PageInfoComponent implements OnInit {
     complement: new FormControl('', [])
   });
 
-  constructor(private activateRoute: ActivatedRoute){}
+  constructor(private activateRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     const paramRaw = this.activateRoute.snapshot.paramMap.get('id');
-    
+
     this.clinicId = paramRaw ? parseInt(paramRaw) : null;
     this.buttonLabel = (this.clinicId) ? 'Salvar' : 'Cadastrar';
   }
 
-  formSubmit(){
+  formSubmit() {
     let bodySubmit: ClincDTO = {
       id: (this.clinicId) ?? undefined,
 
@@ -45,6 +45,7 @@ export class PageInfoComponent implements OnInit {
       ownerName: this.form.get('ownerName')?.value,
 
       phone: this.form.get('phone')?.value,
+      email: this.form.get('email')?.value,
 
       cep: this.form.get('cep')?.value,
       uf: this.form.get('uf')?.value,
